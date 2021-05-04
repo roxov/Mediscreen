@@ -24,21 +24,22 @@ public class PatientRestController {
 
 	private static final Logger LOGGER = LogManager.getLogger(PatientRestController.class);
 
-	@PostMapping(value = "/rest/patient")
+	@PostMapping
 	public PatientDTO addPatient(@RequestBody PatientDTO patient) {
 		LOGGER.info("Adding new user");
 		return patientProxy.addPatient(patient);
 	}
 
-	@GetMapping(value = "/rest/patient/{id}")
+	@GetMapping(value = "/{id}")
 	public PatientDTO getPatientById(@PathVariable("id") @NotNull(message = "patientId is compulsory") Long patientId) {
 		LOGGER.info("Getting patient identified by id");
 		return patientProxy.getPatientById(patientId);
 	}
 
-	@PutMapping(value = "/rest/patient/{id}")
-	public PatientDTO updatePatient(@RequestBody PatientDTO patient) {
+	@PutMapping(value = "/{id}")
+	public PatientDTO updatePatient(@PathVariable("id") @NotNull(message = "patientId is compulsory") Long patientId,
+			@RequestBody PatientDTO patient) {
 		LOGGER.info("Updating patient");
-		return patientProxy.updatePatient(patient);
+		return patientProxy.updatePatient(patientId, patient);
 	}
 }

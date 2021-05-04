@@ -1,0 +1,5 @@
+zuul:  
+  routes:
+    patient:
+      path: /patient/**
+      url: http://localhost:8081/patient/
