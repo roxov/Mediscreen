@@ -4,6 +4,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import fr.asterox.Mediscreen.dto.PatientDTO;
 
 @FeignClient(name = "PatientManagement", url = "localhost:8081")
-public interface PatientProxy {
+public interface PatientManagementProxy {
 
 	@PostMapping(value = "/rest/patient")
 	public PatientDTO addPatient(@RequestBody PatientDTO patient);
@@ -25,6 +26,9 @@ public interface PatientProxy {
 	@PutMapping(value = "/rest/patient/{id}")
 	public PatientDTO updatePatient(@PathVariable("id") @NotNull(message = "patientId is compulsory") Long patientId,
 			@RequestBody PatientDTO patient);
+
+	@DeleteMapping(value = "/rest/patient/{id}")
+	public String deletePatientById(@PathVariable("id") @NotNull(message = "patient id is compulsory") Long patientId);
 
 	@RequestMapping("/patient/list")
 	public String home();
@@ -44,6 +48,6 @@ public interface PatientProxy {
 	@PostMapping("/patient/update/{id}")
 	public String updateSelectedPatient(@PathVariable("id") Long patientId, @Valid PatientDTO patient);
 
-	@GetMapping("/patient/delete/{id}")
+	@DeleteMapping("/patient/delete/{id}")
 	public String deletePatient(@PathVariable("id") Long patientId);
 }

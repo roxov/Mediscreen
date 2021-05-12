@@ -3,3 +3,9 @@ zuul:
     patient:
       path: /patient/**
       url: http://localhost:8081/patient/
+    note:
+      path: /note/**
+      url: http://localhost:8082/note/
+    report:  
+      path: /assess/**
+      url: http://localhost:8083/assess/

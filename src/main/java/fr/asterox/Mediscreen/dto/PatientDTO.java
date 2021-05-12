@@ -2,34 +2,14 @@ package fr.asterox.Mediscreen.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-@Entity
-@Table(name = "patient")
 public class PatientDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "PATIENT_ID")
 	private Long patientId;
-	@Column(name = "FIRST_NAME")
 	private String givenName;
-	@Column(name = "LAST_NAME")
 	private String familyName;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthdate;
 	private String address;
 	private String phone;
-	@Enumerated(EnumType.STRING)
 	private Sex sex;
 
 	public enum Sex {
@@ -48,14 +28,6 @@ public class PatientDTO {
 
 	public PatientDTO() {
 		super();
-	}
-
-	public PatientDTO(String givenName, String familyName, String address, String phone) {
-		super();
-		this.givenName = givenName;
-		this.familyName = familyName;
-		this.address = address;
-		this.phone = phone;
 	}
 
 	public PatientDTO(String givenName, String familyName, Date birthdate, String address, String phone, Sex sex) {
